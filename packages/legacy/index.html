@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+  <title>TodoMVC</title>
+</head>
+<script>
+function rerender() {
+    frames[1].location.reload();
+}
+
+function click(id) {
+    for (var i = 0; i < state.numTodos; i++) {
+        if (state.todos[i].id == id) {
+            state.todos[i].complete = !state.todos[i].complete;
+            rerender();
+            return;
+        }
+    }
+}
+
+function addTodo(text) {
+    var nextId = state.nextId;
+    state.nextId++;
+    state.todos[state.numTodos] = makeTodo(nextId, text, false);
+    state.numTodos++;
+    rerender();
+}
+
+function clearCompleted() {
+    var newTodos = new Object();
+    var newNum = 0;
+    for (var i = 0; i < state.numTodos; i++) {
+        if (!state.todos[i].complete) {
+            newTodos[newNum] = state.todos[i];
+            newNum++;
+        }
+    }
+    state.todos = newTodos;
+    state.numTodos = newNum;
+    rerender();
+}
+
+function filter(newFilter) {
+    state.filter = newFilter;
+    rerender();
+}
+
+function makeTodo(id, label, complete) {
+    var todo = new Object();
+    todo.id = id;
+    todo.label = label;
+    todo.complete = complete;
+    return todo;
+}
+
+var state = new Object();
+state.filter = 'all';
+state.todos = new Object();
+state.numTodos = 0;
+state.nextId = 1;
+</script>
+<FRAMESET rows="75,*" border="0" frameborder="no" framespacing="0">
+    <FRAME src="header.html" scrolling="no">
+    <FRAME name=content src="todos.html" scrolling="no">
+</FRAMESET>
+</html>

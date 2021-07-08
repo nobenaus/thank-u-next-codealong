@@ -1,0 +1,15 @@
+{
+  "name": "thank-u-next-codealong",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "cp -R packages/legacy dist/legacy && yarn workspace modern build"
+  },
+  "repository": "https://github.com/nobenaus/thank-u-next-codealong.git",
+  "author": "Nadja Obenaus <nadbis@gmail.com>",
+  "license": "MIT"
+}
